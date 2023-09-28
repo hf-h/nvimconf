@@ -66,7 +66,48 @@ require("lazy").setup({
 				'nvim-telescope/telescope.nvim', tag = '0.1.3',
 					dependencies = { 'nvim-lua/plenary.nvim' }
 				}
+		},
+		--Neovim lsp stuff
+		{
+				"neovim/nvim-lspconfig"
+		},
+		--Language server installer / manager
+		{
+				"williamboman/mason.nvim"
 		}
+})
+
+require("mason").setup()
+
+--LSP Setups
+local lspconfig = require("lspconfig")
+lspconfig.ols.setup {}
+lspconfig.clangd.setup {}
+lspconfig.lua_ls.setup {}
+
+--LSP Key binds
+vim.api.nvim_create_autocmd('LspAttach', {
+		group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+		callback = function(ev)
+				--Jupp, that some magical bs for sure
+				--Enables outocomplete?
+				vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+				--Local bindings to the buffer we are attaching to
+				local opts = { buffer = ev.buf }
+				vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+				vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+				vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+				vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+				vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+				vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+				vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+				vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+				vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+				vim.keymap.set('n', '<space>f', function()
+					vim.lsp.buf.format { async = true }
+				end, opts)
+		end
 })
 
 --Key binds post package setup
