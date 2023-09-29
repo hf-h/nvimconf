@@ -2,6 +2,14 @@
 --"vim.keymap" for key remaping
 --"vim.g" is global? idk it has mapleader in it
 --"vim.cmd" for vim editor commands
+--":vsplit" to split winodw verticaly
+--":terminal" to start terminal
+
+--TODO: Figure out how to do init:ing with cli args when starting nvim
+--Wanna have different setups for different languages without making it
+--on attach
+
+--TODO: Figure out how to highlight "TODO:" in comments
 
 --local custom = require("custom")
 
