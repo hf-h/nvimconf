@@ -3,6 +3,8 @@
 --"vim.g" is global? idk it has mapleader in it
 --"vim.cmd" for vim editor commands
 
+--local custom = require("custom")
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
@@ -22,6 +24,11 @@ vim.keymap.set('n', '<leader>d', 'dd')
 
 --Project navigation
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+
+--Terminal binds
+--Stolen from the internets TODO: Get it
+--Get out of terminal
+vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h",{silent = true})
 
 --The package manager "Lazy"
 --If the path doesnt excist clone the lazy repo
@@ -68,13 +75,28 @@ require("lazy").setup({
 			dependencies = { 'nvim-lua/plenary.nvim' }
 		}
 	},
+	--Language server installer / manager
+	{
+		"williamboman/mason.nvim"
+	},
 	--Neovim lsp stuff
 	{
 		"neovim/nvim-lspconfig"
 	},
-	--Language server installer / manager
 	{
-		"williamboman/mason.nvim"
+		-- Autocompletion
+		'hrsh7th/nvim-cmp',
+		dependencies = {
+			-- Snippet Engine & its associated nvim-cmp source
+			'L3MON4D3/LuaSnip',
+			'saadparwaiz1/cmp_luasnip',
+
+			-- Adds LSP completion capabilities
+			'hrsh7th/cmp-nvim-lsp',
+
+			-- Adds a number of user-friendly snippets
+			'rafamadriz/friendly-snippets',
+		}
 	}
 })
 
@@ -85,6 +107,7 @@ local lspconfig = require("lspconfig")
 lspconfig.ols.setup {}
 lspconfig.clangd.setup {}
 lspconfig.lua_ls.setup {}
+lspconfig.hls.setup {}
 
 --LSP Key binds
 vim.api.nvim_create_autocmd('LspAttach', {
