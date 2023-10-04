@@ -36,6 +36,7 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 --Terminal binds
 --Stolen from the internets TODO: Get it
 --Get out of terminal
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h",{silent = true})
 
 --The package manager "Lazy"
