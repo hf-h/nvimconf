@@ -33,6 +33,11 @@ vim.keymap.set('n', '<leader>d', 'dd')
 --Project navigation
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
+--Visual mode binds
+
+--System clip windows TODO: check  if this works on Ubuntu
+vim.keymap.set('v', '<leader>y', '"+y')
+
 --Terminal binds
 --Stolen from the internets TODO: Get it
 --Get out of terminal
