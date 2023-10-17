@@ -18,6 +18,7 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 4
+vim.opt.hlsearch = true
 
 vim.g.mapleader = ' '
 
@@ -29,6 +30,7 @@ vim.keymap.set('i', 'jj', '<Esc>')
 
 --Editing
 vim.keymap.set('n', '<leader>d', 'dd')
+vim.keymap.set('n', '<leader>w', vim.cmd.noh)
 
 --Project navigation
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
@@ -131,6 +133,7 @@ lspconfig.hls.setup {}
 lspconfig.pyright.setup {
 		capabilities = capabilities,
 }
+lspconfig.gopls.setup {}
 
 --LSP Key binds
 vim.api.nvim_create_autocmd('LspAttach', {
