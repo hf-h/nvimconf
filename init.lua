@@ -11,13 +11,14 @@
 
 --TODO: Figure out how to highlight "TODO:" in comments
 
---local custom = require("custom")
-
+vim.opt.shiftwidth = 4
+vim.opt.smarttab = true
+vim.opt.expandtab = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 8
+vim.opt.softtabstop = 0
 vim.opt.hlsearch = true
 
 vim.g.mapleader = ' '
