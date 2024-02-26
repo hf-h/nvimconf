@@ -29,6 +29,14 @@ vim.keymap.set('i', 'jj', '<Esc>')
 
 --Normal mode binds
 
+--Building
+
+--For MSVC
+vim.keymap.set('n', '<leader>b', function()
+    vim.cmd('!build')
+    end
+)
+
 --Editing
 vim.keymap.set('n', '<leader>d', 'dd')
 vim.keymap.set('n', '<leader>w', vim.cmd.noh)
@@ -135,6 +143,7 @@ lspconfig.pyright.setup {
 		capabilities = capabilities,
 }
 lspconfig.gopls.setup {}
+lspconfig.zls.setup {}
 
 --LSP Key binds
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -156,7 +165,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
 		vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 		vim.keymap.set('n', '<space>f', function()
-			vim.lsp.buf.format { async = true }
+                        --Disabled until I fix the indentation (change indents 2 -> 4)
+			--vim.lsp.buf.format( { async = true, insert_spaces = true, tab_sizes = 4 } )
 		end, opts)
 	end
 })
@@ -166,8 +176,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 --Telescope binds
 local builtin = require("telescope.builtin")
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>ff', function()
+    builtin.find_files({no_ignore=true, no_ignore_paren=true})
+end, {})
+vim.keymap.set('n', '<leader>fg', function()
+    builtin.live_grep({no_ignore=true, no_ignore_paren=true})
+end, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
