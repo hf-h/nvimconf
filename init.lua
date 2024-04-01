@@ -41,6 +41,9 @@ vim.keymap.set('n', '<leader>b', function()
 vim.keymap.set('n', '<leader>d', 'dd')
 vim.keymap.set('n', '<leader>w', vim.cmd.noh)
 
+--Diagnostics
+vim.keymap.set('n', '<C-h>', vim.diagnostic.open_float)
+
 --Project navigation
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
@@ -77,6 +80,12 @@ require("lazy").setup({
 		"folke/tokyonight.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
+	},
+	{
+		"craftzdog/solarized-osaka.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+                opts = {}
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -241,4 +250,5 @@ require("tokyonight").setup({
 })
 
 --Color scheme Init
-vim.cmd([[colorscheme tokyonight]])
+--vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme solarized-osaka]])
