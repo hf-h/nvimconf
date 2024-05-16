@@ -39,6 +39,7 @@ vim.keymap.set('n', '<leader>b', function()
 
 --Editing
 vim.keymap.set('n', '<leader>d', 'dd')
+vim.keymap.set('n', '<leader>a', '@a')
 vim.keymap.set('n', '<leader>w', vim.cmd.noh)
 
 --Diagnostics
@@ -153,6 +154,7 @@ lspconfig.pyright.setup {
 }
 lspconfig.gopls.setup {}
 lspconfig.zls.setup {}
+lspconfig.omnisharp.setup {}
 
 --LSP Key binds
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -190,6 +192,9 @@ vim.keymap.set('n', '<leader>ff', function()
 end, {})
 vim.keymap.set('n', '<leader>fg', function()
     builtin.live_grep({no_ignore=true, no_ignore_paren=true})
+end, {})
+vim.keymap.set('n', '<leader>fw', function()
+    builtin.grep_string({no_ignore=true, no_ignore_paren=true})
 end, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
